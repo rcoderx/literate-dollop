@@ -1,17 +1,35 @@
 function submitForm() {
-    const form = document.getElementById('registrationForm');
-    const formData = new FormData(form);
+    const userAddress = document.getElementById('userAddress').value;
+    const refereeAddress = document.getElementById('refereeAddress').value;
 
-    fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', { // Replace with your actual backend domain
+    if (!userAddress) {
+        alert('Please enter your Solana address.');
+        return;
+    }
+
+    if (refereeAddress && refereeAddress === userAddress) {
+        alert("Referee's address cannot be the same as yours.");
+        return;
+    }
+
+    const formData = {
+        twitterUsername: document.getElementById('twitterUsername').value,
+        telegramUsername: document.getElementById('telegramUsername').value,
+        userAddress: userAddress,
+        refereeAddress: refereeAddress
+    };
+
+    fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
     })
     .then(response => response.text())
     .then(data => {
-        if(data === 'Registration successful') {
-            const userAddress = document.getElementById('userAddress').value;
-            const referralLink = `https://yourfrontenddomain.com/${userAddress}`; // Replace with your actual frontend domain
-            alert('Registered successfully!\nYour referral link: ' + referralLink);
+        if (data === 'Registration successful') {
+            alert('Registered successfully!');
         } else {
             alert(data);
         }
@@ -20,8 +38,15 @@ function submitForm() {
         console.error('Error:', error);
     });
 }
+
 function fetchReferralCount() {
-    const userAddress = document.getElementById('userAddress').value;
+    const userAddress = document.getElementById('checkAddress').value;
+    
+    if (!userAddress) {
+        alert('Please enter your Solana address.');
+        return;
+    }
+
     fetch(`https://automatic-octo-fortnight-production.up.railway.app/referrals/${userAddress}`)
     .then(response => response.json())
     .then(data => {
