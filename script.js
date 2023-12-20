@@ -2,7 +2,7 @@ function submitForm() {
     const form = document.getElementById('registrationForm');
     const formData = new FormData(form);
 
-    fetch('https://yourbackendurl.com/submit', {
+    fetch('automatic-octo-fortnight-production.up.railway.app/submit', {
         method: 'POST',
         body: formData
     })
