@@ -62,6 +62,7 @@ if (refereeAddressParam) {
     .then(data => {
         if (data === 'Registration successful') {
             alert('Registered successfully!');
+            setRegistrationCookie(); // Set the registration cookie here
         } else {
             alert(data);
         }
@@ -94,7 +95,7 @@ function generateReferralLink() {
 }
 function exportToCSV() {
     // Trigger a GET request to the /export-csv endpoint
-    fetch('/export-csv')
+    fetch('https://automatic-octo-fortnight-production.up.railway.app/export-csv')
         .then(response => {
             if (response.ok) {
                 // If the export is successful, prompt the user to download the CSV
@@ -117,3 +118,11 @@ function exportToCSV() {
             console.error('Error:', error);
         });
 }
+function setRegistrationCookie() {
+    document.cookie = "registered=true; max-age=86400; path=/"; // Expires in 1 day
+}
+window.onload = function() {
+    if (document.cookie.split(';').some((item) => item.trim().startsWith('registered='))) {
+        document.getElementById('registrationForm').style.display = 'none';
+    }
+};
