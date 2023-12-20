@@ -21,6 +21,7 @@ function submitForm() {
 
     // Convert formData to JSON format
     const jsonData = JSON.stringify(formData);
+    console.log('Data being sent to the server:', formData);
 
     fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', {
         method: 'POST',
@@ -41,7 +42,6 @@ function submitForm() {
         console.error('Error:', error);
     });
 }
-
 
 
 function fetchReferralCount() {
