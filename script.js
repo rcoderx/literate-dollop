@@ -92,3 +92,28 @@ function generateReferralLink() {
     const registrationURL = `https://yourfrontenddomain.com/register?ref=${userAddress}`;
     alert('Your referral link:\n' + registrationURL);
 }
+function exportToCSV() {
+    // Trigger a GET request to the /export-csv endpoint
+    fetch('/export-csv')
+        .then(response => {
+            if (response.ok) {
+                // If the export is successful, prompt the user to download the CSV
+                return response.blob();
+            } else {
+                throw new Error('Export failed');
+            }
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'user_data.csv';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
