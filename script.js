@@ -1,9 +1,29 @@
+const urlParams = new URLSearchParams(window.location.search);
+const refereeAddressParam = urlParams.get('ref');
+
+// Function to populate the referee address input field
+function populateRefereeAddress() {
+    // Check for the 'ref' query parameter in the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const refereeAddressParam = urlParams.get('ref');
+
+    // Fill the input field if 'ref' parameter is present
+    if (refereeAddressParam) {
+        document.getElementById('refereeAddress').value = refereeAddressParam;
+    }
+}
+
+// Call the function to populate the referee address input field when the page loads
+window.addEventListener('load', populateRefereeAddress);
+
+// Rest of your code...
+
+
 function submitForm() {
     const userAddress = document.getElementById('userAddress').value;
     const refereeAddress = document.getElementById('refereeAddress').value;
 // Check for the 'ref' query parameter in the URL
-const urlParams = new URLSearchParams(window.location.search);
-const refereeAddressParam = urlParams.get('ref');
+
 
 // Fill the input field if 'ref' parameter is present
 if (refereeAddressParam) {
