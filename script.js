@@ -2,7 +2,7 @@ function submitForm() {
     const form = document.getElementById('registrationForm');
     const formData = new FormData(form);
 
-    fetch('automatic-octo-fortnight-production.up.railway.app/submit', { // Replace with your actual backend domain
+    fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', { // Replace with your actual backend domain
         method: 'POST',
         body: formData
     })
