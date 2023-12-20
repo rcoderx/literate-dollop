@@ -19,15 +19,15 @@ function submitForm() {
         refereeAddress: refereeAddress
     };
 
-    // Add console log to display formData
-    console.log('Data being sent to the server:', formData);
+    // Convert formData to JSON format
+    const jsonData = JSON.stringify(formData);
 
     fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: jsonData  // Send the JSON data
     })
     .then(response => response.text())
     .then(data => {
@@ -41,6 +41,7 @@ function submitForm() {
         console.error('Error:', error);
     });
 }
+
 
 
 function fetchReferralCount() {
