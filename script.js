@@ -1,6 +1,14 @@
 function submitForm() {
     const userAddress = document.getElementById('userAddress').value;
     const refereeAddress = document.getElementById('refereeAddress').value;
+// Check for the 'ref' query parameter in the URL
+const urlParams = new URLSearchParams(window.location.search);
+const refereeAddressParam = urlParams.get('ref');
+
+// Fill the input field if 'ref' parameter is present
+if (refereeAddressParam) {
+    document.getElementById('refereeAddress').value = refereeAddressParam;
+}
 
     if (!userAddress) {
         alert('Please enter your Solana address.');
@@ -58,4 +66,9 @@ function fetchReferralCount() {
         alert(`Total referrals: ${data.referralCount}`);
     })
     .catch(error => console.error('Error:', error));
+}
+function generateReferralLink() {
+    const userAddress = document.getElementById('userAddress').value;
+    const registrationURL = `https://yourfrontenddomain.com/register?ref=${userAddress}`;
+    alert('Your referral link:\n' + registrationURL);
 }
