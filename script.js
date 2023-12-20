@@ -19,6 +19,9 @@ function submitForm() {
         refereeAddress: refereeAddress
     };
 
+    // Add console log to display formData
+    console.log('Data being sent to the server:', formData);
+
     fetch('https://automatic-octo-fortnight-production.up.railway.app/submit', {
         method: 'POST',
         headers: {
@@ -38,6 +41,7 @@ function submitForm() {
         console.error('Error:', error);
     });
 }
+
 
 function fetchReferralCount() {
     const userAddress = document.getElementById('checkAddress').value;
