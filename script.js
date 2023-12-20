@@ -20,3 +20,12 @@ function submitForm() {
         console.error('Error:', error);
     });
 }
+function fetchReferralCount() {
+    const userAddress = document.getElementById('userAddress').value;
+    fetch(`https://automatic-octo-fortnight-production.up.railway.app/referrals/${userAddress}`)
+    .then(response => response.json())
+    .then(data => {
+        alert(`Total referrals: ${data.referralCount}`);
+    })
+    .catch(error => console.error('Error:', error));
+}
